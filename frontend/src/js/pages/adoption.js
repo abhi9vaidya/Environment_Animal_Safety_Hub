@@ -1019,6 +1019,37 @@ function showSuccessModal(data) {
   });
 }
 
+/* ===== SKELETON LOADER FUNCTIONS ===== */
+function createSkeletonCard() {
+  const card = document.createElement("div");
+  card.className = "pet-card skeleton-card";
+  card.innerHTML = `
+    <div class="skeleton skeleton-image"></div>
+    <div class="skeleton-content">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text short"></div>
+      <div class="skeleton-footer">
+         <div class="skeleton skeleton-btn"></div>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function showSkeletons(containerId, count = 3) {
+  const container = document.getElementById(containerId);
+  for (let i = 0; i < count; i++) {
+    container.appendChild(createSkeletonCard());
+  }
+}
+
+function removeSkeletons() {
+  const skeletons = document.querySelectorAll(".skeleton-card");
+  skeletons.forEach(card => card.remove());
+}
+
+
 /* ===== LOAD MORE ===== */
 function initLoadMore() {
   const loadMoreBtn = document.querySelector(".load-more-btn");
@@ -1029,22 +1060,28 @@ function initLoadMore() {
     const btn = this;
     const originalText = btn.innerHTML;
 
-    // Show loading state
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
+    // 1. Disable button
     btn.disabled = true;
+    btn.innerHTML = 'Loading...';
 
-    // Simulate loading more pets
+    // 2. Show Skeletons in the grid
+    showSkeletons("petsGrid", 3);
+
+    // Simulate API delay
     setTimeout(() => {
-      // Add more pet cards (in real app, this would fetch from API)
+      // 3. Remove Skeletons
+      removeSkeletons();
+
+      // 4. Add real pets
       addMorePets();
 
-      // Reset button
+      // 5. Reset button
       btn.innerHTML = originalText;
       btn.disabled = false;
 
       // Show notification
       showNotification("More pets loaded!", "success");
-    }, 1500);
+    }, 1500); // Wait 1.5 seconds to show effect
   });
 }
 
