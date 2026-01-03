@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initFormHandlers();
   // initNavbarActiveState(); -> Moved to loadNavbar.js
   initScrollProgress()
+  initEcoChallenges();
 });
 
 /* ===== NAVBAR (Moved to loadNavbar.js) ===== */
@@ -68,6 +69,28 @@ function initScrollProgress() {
     const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (window.scrollY / windowHeight) * 100;
     scrollProgress.style.width = scrolled + '%';
+  });
+}
+/* ===== ECO CHALLENGES ===== */
+function initEcoChallenges() {
+  const challengeButtons = document.querySelectorAll(".challenge-btn");
+
+  if (challengeButtons.length === 0) return;
+
+  challengeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("completed")) return;
+
+      btn.classList.add("completed");
+      btn.innerText = "Completed ✔";
+      btn.disabled = true;
+
+      // Use existing notification system
+      showNotification(
+        "Great job! 🌱 Small actions create a big impact.",
+        "success"
+      );
+    });
   });
 }
 
