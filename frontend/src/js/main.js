@@ -1114,3 +1114,34 @@ function showFuture(year) {
   }
 }
 
+
+
+function updateSurvivalScore(air, water, bio) {
+  document.getElementById("airBar").style.width = air + "%";
+  document.getElementById("airBar").textContent = air + "%";
+
+  document.getElementById("waterBar").style.width = water + "%";
+  document.getElementById("waterBar").textContent = water + "%";
+
+  document.getElementById("bioBar").style.width = bio + "%";
+  document.getElementById("bioBar").textContent = bio + "%";
+
+  const survival = Math.round((air + water + bio) / 3);
+  document.getElementById("finalScore").textContent =
+    "Survival Score: " + survival + "%";
+
+  const msg = document.getElementById("scoreMessage");
+
+  if (survival >= 75) {
+    msg.textContent = "🌱 Earth is thriving! Life is safe.";
+  } else if (survival >= 40) {
+    msg.textContent = "⚠️ Earth is struggling. Action needed!";
+  } else {
+    msg.textContent = "☠️ Earth is in danger. Immediate action required!";
+  }
+}
+
+/* Example values – connect with your game */
+updateSurvivalScore(70, 55, 65);
+
+
