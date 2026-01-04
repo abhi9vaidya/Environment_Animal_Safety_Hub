@@ -1066,3 +1066,20 @@ carbonForm.addEventListener("submit", function (e) {
   carbonResult.classList.add("success");
   carbonResult.scrollIntoView({ behavior: "smooth" });
 });
+const timelineItems = document.querySelectorAll(".timeline-item");
+
+function revealTimeline() {
+  timelineItems.forEach(item => {
+    const itemTop = item.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    if (itemTop < windowHeight - 100) {
+      item.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealTimeline);
+
+// Initial check
+revealTimeline();
