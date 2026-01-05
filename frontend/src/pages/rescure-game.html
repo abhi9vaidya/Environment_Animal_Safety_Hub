@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLife | Rescue Missions</title>
+    <meta name="description" content="Rescue endangered animals in this interactive mini-game. Protect wildlife and earn badges!">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <!-- AOS for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        /* ===================== GLOBAL ===================== */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #e0f7fa, #b2dfdb);
+            color: #1a1a2e;
+        }
+        h2, p {
+            margin: 0;
+        }
+        section {
+            padding: 3rem 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg,#4ade80,#22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        /* ===================== GAME AREA ===================== */
+        .game-area {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border: 2px solid #2e7d32;
+            border-radius: 16px;
+            background: linear-gradient(to bottom,#a8e6cf,#dcedc1);
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .animal, .threat {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+            user-select: none;
+        }
+        .animal:hover {
+            transform: scale(1.2) rotate(-10deg);
+        }
+        .threat {
+            animation: threatMove linear infinite;
+        }
+
+        /* ===================== SCOREBOARD ===================== */
+        .scoreboard {
+            display: flex;
+            justify-content: space-around;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .badges span {
+            margin-left: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* ===================== BUTTON ===================== */
+        .btn-game {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg,#2e7d32,#1b5e20);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+        .btn-game:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(46,125,50,0.4);
+        }
+
+        /* ===================== ANIMATIONS ===================== */
+        @keyframes threatMove {
+            0% { top: 0%; left: 0%; }
+            100% { top: 100%; left: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="rescue-missions" id="rescueMissions" data-aos="fade-up">
+    <h2 class="section-title">🐾 Rescue Missions</h2>
+    <p>Save as many endangered animals as you can! Click them before threats reach them. Earn badges and protect wildlife.</p>
+  
+    <div class="game-area" id="gameArea">
+        <!-- Animals and threats will appear here -->
+    </div>
+
+    <div class="scoreboard">
+        <span>Score: <span id="score">0</span></span>
+        <span>Time: <span id="timer">60</span>s</span>
+        <div id="badges" class="badges"></div>
+    </div>
+
+    <button id="startGame" class="btn-game">Start Mission</button>
+</section>
+
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    AOS.init();
+
+    const gameArea = document.getElementById('gameArea');
+    const scoreEl = document.getElementById('score');
+    const timerEl = document.getElementById('timer');
+    const badgesEl = document.getElementById('badges');
+    const startBtn = document.getElementById('startGame');
+
+    let score = 0;
+    let time = 60;
+    let gameInterval, countdownInterval;
+
+    const animals = ['🦁','🐼','🐘','🦏','🐅'];
+    const threats = ['🔥','🪓','💀'];
+
+    function spawnAnimal() {
+        const animal = document.createElement('div');
+        animal.classList.add('animal');
+        animal.textContent = animals[Math.floor(Math.random() * animals.length)];
+        animal.style.top = `${Math.random() * (gameArea.clientHeight - 60)}px`;
+        animal.style.left = `${Math.random() * (gameArea.clientWidth - 60)}px`;
+        animal.addEventListener('click', () => {
+            score += 10;
+            scoreEl.textContent = score;
+            animal.remove();
+            checkBadge();
+        });
+        gameArea.appendChild(animal);
+        setTimeout(() => {
+            if(gameArea.contains(animal)){
+                animal.remove();
+                score -= 5;
+                scoreEl.textContent = score;
+            }
+        }, 5000);
+    }
+
+    function spawnThreat() {
+        const threat = document.createElement('div');
+        threat.classList.add('threat');
+        threat.textContent = threats[Math.floor(Math.random() * threats.length)];
+        threat.style.top = `${Math.random() * (gameArea.clientHeight - 60)}px`;
+        threat.style.left = `${Math.random() * (gameArea.clientWidth - 60)}px`;
+        gameArea.appendChild(threat);
+        setTimeout(() => threat.remove(), 6000);
+    }
+
+    function startGame() {
+        score = 0;
+        time = 60;
+        scoreEl.textContent = score;
+        timerEl.textContent = time;
+        badgesEl.innerHTML = '';
+        gameArea.innerHTML = '';
+
+        gameInterval = setInterval(() => {
+            spawnAnimal();
+            spawnThreat();
+        }, 1000);
+
+        countdownInterval = setInterval(() => {
+            time--;
+            timerEl.textContent = time;
+            if(time <= 0){
+                clearInterval(gameInterval);
+                clearInterval(countdownInterval);
+                alert(`Mission Over! Score: ${score}`);
+            }
+        }, 1000);
+    }
+
+    function checkBadge(){
+        if(score >= 50 && !document.getElementById('badge1')){
+            const badge = document.createElement('span');
+            badge.textContent = '🌿 Wildlife Protector';
+            badge.id = 'badge1';
+            badgesEl.appendChild(badge);
+        }
+        if(score >= 100 && !document.getElementById('badge2')){
+            const badge = document.createElement('span');
+            badge.textContent = '🌳 Forest Guardian';
+            badge.id = 'badge2';
+            badgesEl.appendChild(badge);
+        }
+    }
+
+    startBtn.addEventListener('click', startGame);
+</script>
+
+</body>
+</html>
