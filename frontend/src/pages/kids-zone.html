@@ -460,6 +460,258 @@
       width: 75%;
     }
 
+    /* ===== VOICE ECHO GAME MODAL ===== */
+    .voice-game-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .voice-game-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .voice-game-container {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 40px;
+      width: 90%;
+      max-width: 800px;
+      border: var(--card-border);
+      box-shadow: 0 30px 80px rgba(0, 200, 83, 0.3);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.4s ease;
+    }
+
+    .voice-game-modal.active .voice-game-container {
+      transform: translateY(0);
+    }
+
+    .voice-game-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .voice-game-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: var(--header-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .voice-game-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .voice-game-emoji {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .voice-game-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .voice-game-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .word-display {
+      background: var(--glass-bg);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      border: var(--card-border);
+    }
+
+    .current-word {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 20px 0;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .word-phonetic {
+      color: var(--text-light);
+      font-style: italic;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .word-meaning {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .voice-controls {
+      background: var(--glass-bg);
+      border-radius: 20px;
+      padding: 30px;
+      border: var(--card-border);
+    }
+
+    .microphone-btn {
+      width: 100%;
+      padding: 20px;
+      background: var(--button-gradient);
+      border: none;
+      border-radius: 15px;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .microphone-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 200, 83, 0.4);
+    }
+
+    .microphone-btn.listening {
+      background: linear-gradient(135deg, #ff5252, #ff9800);
+      animation: pulse 1s infinite;
+    }
+
+    .microphone-btn i {
+      font-size: 1.5rem;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: var(--glass-bg);
+      border-radius: 15px;
+      border: var(--card-border);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .feedback-message {
+      text-align: center;
+      padding: 15px;
+      border-radius: 15px;
+      margin-top: 20px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .feedback-success {
+      background: rgba(0, 230, 118, 0.2);
+      color: var(--success);
+      border: 2px solid var(--success);
+    }
+
+    .feedback-error {
+      background: rgba(255, 82, 82, 0.2);
+      color: var(--danger);
+      border: 2px solid var(--danger);
+    }
+
+    .close-game-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--danger);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-game-btn:hover {
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    .word-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .word-bubble {
+      padding: 8px 16px;
+      background: var(--glass-bg);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      border: var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .word-bubble.completed {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .word-bubble.current {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(83, 109, 254, 0.4);
+    }
+
     /* ===== RESPONSIVE DESIGN ===== */
     @media (max-width: 1200px) {
       .games-grid {
@@ -500,6 +752,18 @@
         height: 50px;
         font-size: 1.2rem;
       }
+
+      .voice-game-container {
+        padding: 30px 20px;
+      }
+
+      .voice-game-header h2 {
+        font-size: 2rem;
+      }
+
+      .current-word {
+        font-size: 2.5rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -527,6 +791,14 @@
         padding: 10px 24px;
         font-size: 0.95rem;
       }
+
+      .voice-game-emoji {
+        font-size: 60px;
+      }
+
+      .current-word {
+        font-size: 2rem;
+      }
     }
 
     /* ===== ANIMATIONS ===== */
@@ -544,6 +816,15 @@
     .animate-card {
       animation: fadeInUp 0.6s ease forwards;
       opacity: 0;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .bounce {
+      animation: bounce 0.5s ease;
     }
   </style>
 </head>
@@ -718,9 +999,9 @@
       </div>
     </div>
 
-    <!-- Game 7 -->
+    <!-- Game 7 - VOICE ECHO GAME (Now Playable) -->
     <div class="game-card animate-card" style="animation-delay: 0.7s">
-      <span class="card-badge badge-new">Soon</span>
+      <span class="card-badge badge-new">New</span>
       <div class="card-emoji">🎤🗣️</div>
       <h3 class="card-title">Voice Echo Game</h3>
       <p class="card-description">Repeat eco-words aloud! Fun pronunciation & memory training for young learners.</p>
@@ -729,10 +1010,10 @@
           <i class="fas fa-child"></i>
           <span>Age 3+</span>
         </div>
-        <a href="#" class="play-btn disabled">
-          <i class="fas fa-clock"></i>
-          Coming Soon
-        </a>
+        <button class="play-btn play-voice-game">
+          <i class="fas fa-microphone"></i>
+          Play Now
+        </button>
       </div>
     </div>
 
@@ -762,36 +1043,75 @@
         </a>
       </div>
     </div>
+  </section>
 
-  <!-- Game 9 -->
-    <div class="game-card animate-card" style="animation-delay: 0.8s">
-      <span class="card-badge badge-hot">New Release</span>
-      <div class="card-emoji">🏃‍♂️☁️</div>
-      <h3 class="card-title">Eco-Runner: Carbon Race</h3>
-      <p class="card-description">Race through the forest, answer trivia to lower your carbon footprint, and save the world!</p>
+  <!-- Voice Echo Game Modal -->
+  <div class="voice-game-modal" id="voiceGameModal">
+    <div class="voice-game-container">
+      <button class="close-game-btn" id="closeVoiceGame">
+        <i class="fas fa-times"></i>
+      </button>
       
-      <div class="progress-container">
-        <div class="progress-label">
-          <span>Eco-Status</span>
-          <span>0%</span>
+      <div class="voice-game-header">
+        <div class="voice-game-emoji">🎤🗣️</div>
+        <h2>Voice Echo Game</h2>
+        <p>Repeat the eco-word you see and hear! Perfect your pronunciation and learn environmental vocabulary.</p>
+      </div>
+
+      <div class="game-stats">
+        <div class="stat-item">
+          <span class="stat-value" id="score">0</span>
+          <span class="stat-label">Score</span>
         </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 10%"></div>
+        <div class="stat-item">
+          <span class="stat-value" id="level">1</span>
+          <span class="stat-label">Level</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="streak">0</span>
+          <span class="stat-label">Streak</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="accuracy">100%</span>
+          <span class="stat-label">Accuracy</span>
         </div>
       </div>
 
-      <div class="card-footer">
-        <div class="age-indicator">
-          <i class="fas fa-child"></i>
-          <span>Age 5+</span>
+      <div class="voice-game-content">
+        <div class="word-display">
+          <h3>Current Word</h3>
+          <div class="word-phonetic" id="wordPhonetic">/ˈiːkoʊ/</div>
+          <div class="current-word" id="currentWord">ECO</div>
+          <div class="word-meaning" id="wordMeaning">Related to the environment and nature</div>
         </div>
-        <a href="./carbon-race.html" class="play-btn">
-          <i class="fas fa-play-circle"></i>
-          Play Now
-        </a>
+
+        <div class="voice-controls">
+          <h3>Voice Control</h3>
+          <button class="microphone-btn" id="microphoneBtn">
+            <i class="fas fa-microphone"></i>
+            <span>Click & Speak</span>
+          </button>
+          
+          <div class="instruction">
+            <p><i class="fas fa-info-circle"></i> Click the microphone, then repeat the word clearly. Try to match the pronunciation!</p>
+          </div>
+
+          <div class="feedback-message" id="feedbackMessage"></div>
+
+          <div class="game-controls">
+            <button class="play-btn" id="nextWordBtn" style="width: 100%; margin-top: 20px;">
+              <i class="fas fa-forward"></i>
+              Next Word
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="word-list" id="wordList">
+        <!-- Word bubbles will be generated here -->
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -867,9 +1187,6 @@
       });
     });
 
-    // Initialize
-    animateCards();
-    
     // Add hover effect for cards
     document.querySelectorAll('.game-card').forEach(card => {
       card.addEventListener('mouseenter', () => {
@@ -880,6 +1197,292 @@
         card.style.transform = 'translateY(0) scale(1)';
       });
     });
+
+    // ===== VOICE ECHO GAME LOGIC =====
+    const voiceGameModal = document.getElementById('voiceGameModal');
+    const closeVoiceGameBtn = document.getElementById('closeVoiceGame');
+    const playVoiceGameBtn = document.querySelector('.play-voice-game');
+    const microphoneBtn = document.getElementById('microphoneBtn');
+    const nextWordBtn = document.getElementById('nextWordBtn');
+    const currentWordEl = document.getElementById('currentWord');
+    const wordPhoneticEl = document.getElementById('wordPhonetic');
+    const wordMeaningEl = document.getElementById('wordMeaning');
+    const scoreEl = document.getElementById('score');
+    const levelEl = document.getElementById('level');
+    const streakEl = document.getElementById('streak');
+    const accuracyEl = document.getElementById('accuracy');
+    const feedbackMessageEl = document.getElementById('feedbackMessage');
+    const wordListEl = document.getElementById('wordList');
+
+    // Eco-themed word list with phonetic pronunciation and meanings
+    const ecoWords = [
+      { word: "ECO", phonetic: "/ˈiːkoʊ/", meaning: "Related to the environment and nature" },
+      { word: "GREEN", phonetic: "/ɡriːn/", meaning: "Color of plants; environmentally friendly" },
+      { word: "RECYCLE", phonetic: "/ˌriːˈsaɪkəl/", meaning: "Convert waste into reusable material" },
+      { word: "TREE", phonetic: "/triː/", meaning: "Tall plant with trunk and branches" },
+      { word: "WATER", phonetic: "/ˈwɔːtər/", meaning: "Clear liquid essential for life" },
+      { word: "EARTH", phonetic: "/ɜːrθ/", meaning: "Our planet; soil or ground" },
+      { word: "SUN", phonetic: "/sʌn/", meaning: "Star that gives light and heat to Earth" },
+      { word: "LEAF", phonetic: "/liːf/", meaning: "Flat green part of a plant" },
+      { word: "SEED", phonetic: "/siːd/", meaning: "Small object from which plants grow" },
+      { word: "OCEAN", phonetic: "/ˈoʊʃən/", meaning: "Vast body of salt water" },
+      { word: "FOREST", phonetic: "/ˈfɔːrɪst/", meaning: "Large area covered with trees" },
+      { word: "ANIMAL", phonetic: "/ˈænɪməl/", meaning: "Living creature that is not a plant" },
+      { word: "BIRD", phonetic: "/bɜːrd/", meaning: "Feathered animal that can usually fly" },
+      { word: "FLOWER", phonetic: "/ˈflaʊər/", meaning: "Colorful part of a plant" },
+      { word: "SOIL", phonetic: "/sɔɪl/", meaning: "Top layer of earth where plants grow" },
+      { word: "AIR", phonetic: "/er/", meaning: "Invisible gas we breathe" },
+      { word: "CLEAN", phonetic: "/kliːn/", meaning: "Free from dirt or pollution" },
+      { word: "SAVE", phonetic: "/seɪv/", meaning: "Keep safe; prevent waste" },
+      { word: "GROW", phonetic: "/ɡroʊ/", meaning: "Increase in size; develop" },
+      { word: "NATURE", phonetic: "/ˈneɪtʃər/", meaning: "Natural world including plants and animals" }
+    ];
+
+    // Game state
+    let gameState = {
+      score: 0,
+      level: 1,
+      streak: 0,
+      totalAttempts: 0,
+      correctAttempts: 0,
+      currentWordIndex: 0,
+      isListening: false,
+      completedWords: new Set(),
+      recognition: null
+    };
+
+    // Initialize game
+    function initVoiceGame() {
+      gameState = {
+        score: 0,
+        level: 1,
+        streak: 0,
+        totalAttempts: 0,
+        correctAttempts: 0,
+        currentWordIndex: Math.floor(Math.random() * ecoWords.length),
+        isListening: false,
+        completedWords: new Set(),
+        recognition: null
+      };
+
+      updateGameDisplay();
+      generateWordBubbles();
+      
+      // Initialize speech recognition
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        gameState.recognition = new SpeechRecognition();
+        gameState.recognition.continuous = false;
+        gameState.recognition.interimResults = false;
+        gameState.recognition.lang = 'en-US';
+
+        gameState.recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript.trim().toUpperCase();
+          checkPronunciation(transcript);
+        };
+
+        gameState.recognition.onerror = (event) => {
+          console.error('Speech recognition error:', event.error);
+          showFeedback('Oops! Could not hear you clearly. Try again!', false);
+          microphoneBtn.classList.remove('listening');
+          gameState.isListening = false;
+          microphoneBtn.innerHTML = '<i class="fas fa-microphone"></i><span>Click & Speak</span>';
+        };
+
+        gameState.recognition.onend = () => {
+          microphoneBtn.classList.remove('listening');
+          gameState.isListening = false;
+          microphoneBtn.innerHTML = '<i class="fas fa-microphone"></i><span>Click & Speak</span>';
+        };
+      } else {
+        showFeedback('Your browser does not support speech recognition. Try Chrome or Edge!', false);
+        microphoneBtn.disabled = true;
+        microphoneBtn.innerHTML = '<i class="fas fa-microphone-slash"></i><span>Not Supported</span>';
+      }
+    }
+
+    // Update game display
+    function updateGameDisplay() {
+      const currentWord = ecoWords[gameState.currentWordIndex];
+      currentWordEl.textContent = currentWord.word;
+      wordPhoneticEl.textContent = currentWord.phonetic;
+      wordMeaningEl.textContent = currentWord.meaning;
+      
+      scoreEl.textContent = gameState.score;
+      levelEl.textContent = gameState.level;
+      streakEl.textContent = gameState.streak;
+      
+      const accuracy = gameState.totalAttempts > 0 
+        ? Math.round((gameState.correctAttempts / gameState.totalAttempts) * 100)
+        : 100;
+      accuracyEl.textContent = `${accuracy}%`;
+      
+      updateWordBubbles();
+    }
+
+    // Generate word bubbles
+    function generateWordBubbles() {
+      wordListEl.innerHTML = '';
+      ecoWords.forEach((wordObj, index) => {
+        const bubble = document.createElement('div');
+        bubble.className = 'word-bubble';
+        bubble.textContent = wordObj.word;
+        bubble.dataset.index = index;
+        wordListEl.appendChild(bubble);
+      });
+      updateWordBubbles();
+    }
+
+    // Update word bubbles state
+    function updateWordBubbles() {
+      const bubbles = wordListEl.querySelectorAll('.word-bubble');
+      bubbles.forEach(bubble => {
+        const index = parseInt(bubble.dataset.index);
+        bubble.classList.remove('completed', 'current');
+        
+        if (gameState.completedWords.has(index)) {
+          bubble.classList.add('completed');
+        }
+        
+        if (index === gameState.currentWordIndex) {
+          bubble.classList.add('current');
+        }
+      });
+    }
+
+    // Check pronunciation
+    function checkPronunciation(spokenWord) {
+      const currentWord = ecoWords[gameState.currentWordIndex].word;
+      gameState.totalAttempts++;
+      
+      // Simple check - allow close matches
+      const isCorrect = spokenWord === currentWord || 
+                       spokenWord.includes(currentWord) || 
+                       currentWord.includes(spokenWord);
+      
+      if (isCorrect) {
+        gameState.score += 10 * gameState.level;
+        gameState.streak++;
+        gameState.correctAttempts++;
+        
+        // Mark word as completed
+        gameState.completedWords.add(gameState.currentWordIndex);
+        
+        // Level up every 5 correct words
+        if (gameState.completedWords.size % 5 === 0) {
+          gameState.level++;
+          showFeedback(`🎉 Level Up! You're now at level ${gameState.level}`, true);
+        } else {
+          showFeedback('✅ Perfect! Great pronunciation!', true);
+        }
+        
+        // Move to next word
+        setTimeout(() => {
+          nextWord();
+        }, 1500);
+      } else {
+        gameState.streak = 0;
+        showFeedback(`Almost! You said "${spokenWord}", try saying "${currentWord}"`, false);
+      }
+      
+      updateGameDisplay();
+    }
+
+    // Show feedback message
+    function showFeedback(message, isSuccess) {
+      feedbackMessageEl.textContent = message;
+      feedbackMessageEl.className = `feedback-message ${isSuccess ? 'feedback-success' : 'feedback-error'}`;
+      feedbackMessageEl.style.display = 'block';
+      
+      if (isSuccess) {
+        currentWordEl.classList.add('bounce');
+        setTimeout(() => {
+          currentWordEl.classList.remove('bounce');
+        }, 500);
+      }
+      
+      setTimeout(() => {
+        feedbackMessageEl.style.display = 'none';
+      }, 3000);
+    }
+
+    // Move to next word
+    function nextWord() {
+      // Find next incomplete word
+      let nextIndex = (gameState.currentWordIndex + 1) % ecoWords.length;
+      let attempts = 0;
+      
+      while (gameState.completedWords.has(nextIndex) && attempts < ecoWords.length) {
+        nextIndex = (nextIndex + 1) % ecoWords.length;
+        attempts++;
+      }
+      
+      // If all words completed, reset completed list
+      if (attempts >= ecoWords.length) {
+        gameState.completedWords.clear();
+        showFeedback('🎊 Amazing! You completed all words! Starting again...', true);
+      }
+      
+      gameState.currentWordIndex = nextIndex;
+      updateGameDisplay();
+    }
+
+    // Toggle microphone
+    function toggleMicrophone() {
+      if (!gameState.recognition) {
+        showFeedback('Speech recognition not available in your browser.', false);
+        return;
+      }
+      
+      if (!gameState.isListening) {
+        gameState.recognition.start();
+        microphoneBtn.classList.add('listening');
+        gameState.isListening = true;
+        microphoneBtn.innerHTML = '<i class="fas fa-microphone"></i><span>Listening... Speak Now!</span>';
+        showFeedback('🎤 Listening... Say the word clearly!', true);
+      } else {
+        gameState.recognition.stop();
+        microphoneBtn.classList.remove('listening');
+        gameState.isListening = false;
+        microphoneBtn.innerHTML = '<i class="fas fa-microphone"></i><span>Click & Speak</span>';
+      }
+    }
+
+    // Event Listeners for Voice Game
+    playVoiceGameBtn.addEventListener('click', () => {
+      initVoiceGame();
+      voiceGameModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeVoiceGameBtn.addEventListener('click', () => {
+      voiceGameModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      
+      // Stop recognition if active
+      if (gameState.recognition && gameState.isListening) {
+        gameState.recognition.stop();
+      }
+    });
+
+    microphoneBtn.addEventListener('click', toggleMicrophone);
+    nextWordBtn.addEventListener('click', nextWord);
+
+    // Close modal on outside click
+    voiceGameModal.addEventListener('click', (e) => {
+      if (e.target === voiceGameModal) {
+        voiceGameModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // Stop recognition if active
+        if (gameState.recognition && gameState.isListening) {
+          gameState.recognition.stop();
+        }
+      }
+    });
+
+    // Initialize
+    animateCards();
   </script>
   
   <!-- Chatbase Script -->
