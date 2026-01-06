@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoSphere Community</title>
+  <link rel="stylesheet" href="../../css/pages/community.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="page">
+
+  <!-- Watermark Background -->
+  <div id="dashboard-bg">
+    <div class="watermark">🌱</div>
+  </div>
+
+  <div class="theme-toggle" id="themeToggle" title="Toggle Dark Mode"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar column">
+    <div class="sidebar-icon" data-tooltip="Profile"><i class="fa-solid fa-user"></i></div>
+    <div class="sidebar-icon" data-tooltip="Blogs"><i class="fa-solid fa-blog"></i></div>
+    <div class="sidebar-icon" data-tooltip="Groups"><i class="fa-solid fa-users"></i></div>
+    <div class="sidebar-icon" data-tooltip="Chat"><i class="fa-solid fa-comment"></i></div>
+    <div class="sidebar-icon active" data-tooltip="Posts"><i class="fa-solid fa-newspaper"></i></div>
+  </aside>
+
+
+  <!-- Main Content -->
+  <main class="main-content column">
+    <div id="posts-container">
+      <!-- Post cards will be injected here -->
+    </div>
+    <div id="loader" class="loader">Loading more posts...</div>
+  </main>
+
+  <aside class="right-panel column">
+    <div class="panel-section">
+        <h3 class="heading">Trending Posts</h3>
+        <div class="trending-post">🌿 How to grow indoor plants</div>
+        <div class="trending-post">🦜 Bird sanctuary visit</div>
+        <div class="trending-post">♻️ Eco-friendly hacks</div>
+    </div>
+
+    <div class="panel-section">
+        <h3 class="heading">Suggested Friends</h3>
+        <div class="suggested-user">
+        <img src="https://picsum.photos/seed/avatar1/50" alt="">
+        <span>User12</span>
+        <button class="btn">Follow</button>
+        </div>
+        <div class="suggested-user">
+        <img src="https://picsum.photos/seed/avatar2/50" alt="">
+        <span>User34</span>
+        <button class="btn">Follow</button>
+        </div>
+    </div>
+    </aside>
+  
+  <script src="../../js/pages/community.js"></script>
+</body>
+</html>
