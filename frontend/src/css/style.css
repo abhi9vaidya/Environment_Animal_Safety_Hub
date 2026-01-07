@@ -2069,7 +2069,20 @@ body.dark-theme .bot-message {
   }
 }
 
+/* =============================== */
+/* ECO CHALLENGES – FINAL STYLES */
+/* =============================== */
 
+.eco-challenges-section {
+  padding: 100px 0;
+  background: #f6fbf7;
+}
+
+/* Container spacing */
+.eco-challenges-section .section-container {
+  max-width: 1280px;      /* wider container */
+  margin: 0 auto;
+  padding: 0 40px;        /* more side spacing */
 
 
 
@@ -2411,87 +2424,85 @@ body.dark-theme .bot-message {
   height: 100%;
   pointer-events: none;
   z-index: -1;
+
+/* GRID – FORCE 3 CARDS PER ROW */
+.eco-challenges-section .eco-ch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;              /* more gap between cards */
+  margin-top: 60px;
 }
 
-/* ===== ☁️ CLOUDS ===== */
-.cloud {
-  position: absolute;
-  top: 10%;
-  width: 220px;
-  height: 80px;
-  background: rgba(255,255,255,0.8);
-  border-radius: 50px;
-  filter: blur(2px);
-  animation: moveClouds 80s linear infinite;
+/* CARD – BIGGER SIZE */
+.eco-challenges-section .eco-ch-card {
+  background: #ffffff;
+  padding: 44px 36px;     /* ⬆ bigger padding */
+  border-radius: 22px;
+  text-align: center;
+  min-height: 300px;      /* ⬆ taller cards */
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.cloud::before,
-.cloud::after {
-  content: '';
-  position: absolute;
-  background: inherit;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  top: -40px;
+/* ICON – BIGGER */
+.eco-challenges-section .eco-ch-card i {
+  font-size: 48px;        /* ⬆ larger icon */
+  color: #2ecc71;
+  margin-bottom: 18px;
+  transition: transform 0.3s ease;
 }
 
-.cloud::before { left: 30px; }
-.cloud::after { right: 30px; }
-
-.cloud1 { top: 15%; left: -300px; animation-duration: 90s; }
-.cloud2 { top: 30%; left: -400px; animation-duration: 110s; }
-.cloud3 { top: 45%; left: -500px; animation-duration: 130s; }
-
-@keyframes moveClouds {
-  to { transform: translateX(120vw); }
+/* TITLE */
+.eco-challenges-section .eco-ch-card h3 {
+  font-size: 22px;        /* ⬆ bigger title */
+  margin-bottom: 12px;
+  color: #1f2937;
 }
 
-/* ===== 🕊️ BIRDS ===== */
-.bird {
-  position: absolute;
-  font-size: 22px;
-  animation: flyBird 15s linear forwards;
+/* TEXT */
+.eco-challenges-section .eco-ch-card p {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 26px;
+  line-height: 1.7;
 }
 
-@keyframes flyBird {
-  from { transform: translateX(-50px) translateY(0); }
-  to { transform: translateX(110vw) translateY(-40px); }
+/* BUTTON */
+.eco-challenges-section .eco-ch-btn {
+  padding: 12px 30px;
+  border-radius: 999px;
+  border: none;
+  background: #2ecc71;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* ===== 🌧️ RAIN ===== */
-.rain-drop {
-  position: absolute;
-  width: 2px;
-  height: 18px;
-  background: rgba(255,255,255,0.6);
-  animation: rainFall 1s linear infinite;
+/* HOVER EFFECT */
+.eco-challenges-section .eco-ch-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 26px 60px rgba(46, 204, 113, 0.25);
 }
 
-@keyframes rainFall {
-  from { transform: translateY(-100px); }
-  to { transform: translateY(110vh); }
+.eco-challenges-section .eco-ch-card:hover i {
+  transform: scale(1.15);
 }
 
-/* ===== 🍃 LEAVES ===== */
-.leaf {
-  position: absolute;
-  font-size: 18px;
-  animation: leafFloat 12s linear infinite;
+.eco-challenges-section .eco-ch-btn:hover {
+  background: #27ae60;
 }
 
-@keyframes leafFloat {
-  0% { transform: translateY(-50px) rotate(0deg); }
-  100% { transform: translateY(110vh) rotate(360deg); }
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .eco-challenges-section .eco-ch-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* ===== 🌞 SUN GLOW ===== */
-.sun-glow {
-  background: radial-gradient(circle at top right, rgba(255,223,128,0.35), transparent 60%);
-  opacity: 0;
-  transition: opacity 2s ease;
-}
-
-.sun-glow.active {
-  opacity: 1;
+@media (max-width: 576px) {
+  .eco-challenges-section .eco-ch-grid {
+    grid-template-columns: 1fr;
+  }
 }
